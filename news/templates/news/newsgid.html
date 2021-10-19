@@ -1,0 +1,77 @@
+{% extends 'news/index.html' %}
+{% block search %}
+
+<div class="search-content" id = "search">
+	{% if request.user.is_authenticated %}
+<ul class="links">
+	<li><a><input type="date" id="date-news" name="date" max="{{date}}" value="{{date}}" min="{{mindate}}"></a></li>
+
+	<li><a class="desktop-link">{{sortby}}</a>
+		<input type="checkbox" id="show-sortby">
+		<label for="show-sortby">{{sortby}}</label>
+		<ul id="sortby">
+			{% for m in langArr.sortby %}
+			<li><a onclick="checkFluency(this)" class="cat">{{m}}<input type="radio" name = "slider-sort" class="checkcat" ></a></li>
+			{% endfor %}
+		</ul>
+	</li>
+<li><a class="desktop-link">{{source}}</a>
+		<input onclick="check_catal()" type="radio" name = "slider-menu" id="show-source">
+		<label for="show-source">{{source}}</label>
+		<ul id="source">
+			{% for m in langArr.source %}
+			<li><a onclick="checkFluency(this)" class="cat">{{m}}<input type="checkbox" class="checkcat" ></a></li>
+			{% endfor %}
+		</ul>
+	</li>
+	<li><a class="desktop-link">{{category}}</a>
+		<input onclick="check_catal(this)" type="radio" name = "slider-menu" id="show-category" checked>
+		<label for="show-category">{{category}}</label>
+		<ul id="category">
+			{% for m in langArr.category %}
+			<li><a onclick="checkFluency(this)" class="cat">{{m}}<input type="radio" name = "slider-category" class="checkcat" ></a></li>
+			{% endfor %}
+		</ul>
+	</li>
+	<li><button type="submit" onclick="changenews()" class="go-icon"><i class="fas fa-arrow-alt-circle-right"></i></button></li>
+</ul>
+	{% endif %}
+</div>
+{% endblock %}
+{% block menu %}
+<div class="menu-content" id="menu">
+	<ul class="links">
+		<li><a id="changelan" class="header-lang" type="button" onclick="changeLang()"> {{ lang }}</a></li>
+		{% if request.user.is_authenticated %}
+		<li>
+			<a class="desktop-link"><i class="fas fa-user"></i></a>
+			<input type="checkbox" id="show-features">
+			<label for="show-features"><i class="fas fa-user"></i></label>
+			<ul>
+				<li> <a id="sign-out" href="{% url 'logout' %}">{{user.username}} | {{ logout }}</a></li>
+			<li> <a id="del-account" href="{% url 'delete' %}">{{ del_acc }}</a> </li>
+			</ul>
+		</li>
+		{% else %}
+		<li> <a id="show-auth" href="{% url 'login' %}">{{ login }}</a> </li>
+		{% endif %}
+	</ul>
+</div>
+{% endblock %}
+{% block content %}
+	<div class="addedBlocks">
+{% for n in news %}
+	<div class = 'block'>
+		<img src="{{ n.urlToImage }}" alt="" href="" />
+		<div class='article'>
+			<h3>{{ n.title }}</h3>
+			<div class='overlay'>
+				<a class="link-header" href="{{ n.url }}" target="_blank">{{ n.title }} </a>
+				<span>{{ n.description }}</span>
+			</div>
+		</div>
+			</div>
+	{% endfor %}
+		</div>
+{% endblock %}
+

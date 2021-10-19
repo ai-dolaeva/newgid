@@ -1,0 +1,26 @@
+{% extends 'news/index.html' %}
+
+{% block content %}
+<div class="auth-block" >
+<div class='wrapper'>
+<div class='title-text'>
+		 <div class='title signup'>signup form</div>
+	</div>
+	<div class="form-container">
+    <div class="form-inner">
+<form method="post" class="signup">
+	{% csrf_token %}
+ {% for f in form %}
+    <div class="field">  {{ f }} </div>
+<div class="form-error">{{ f.errors }}</div>
+{% endfor %}
+<div class="field">
+    <button id ="but_sign" type="submit" value="signup">Регистрация</button>
+</div>
+</form>
+	</div>
+	</div>
+	</div>
+	</div>
+
+{% endblock %}
