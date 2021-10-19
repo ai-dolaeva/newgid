@@ -22,7 +22,7 @@ def get_news(req):
     EVERYTHING_URL = "https://newsapi.org/v2/everything"
     HEADLINES_URL = "https://newsapi.org/v2/top-headlines"
     URL = HEADLINES_URL
-    print(req)
+    # print(req)
     keys = req.keys()
     today = datetime.now()
     r = ''
@@ -68,9 +68,7 @@ def get_news(req):
         else:
             URL = HEADLINES_URL
             payload["category"] = 'general'
-    print(payload)
+    # print(payload)
     r = requests.get(URL, auth=auth, timeout=100, params=payload)
-
-    print(r.json()['articles'])
 
     return r.json()['articles']
