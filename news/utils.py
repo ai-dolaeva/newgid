@@ -18,7 +18,7 @@ class NewsApiAuth(AuthBase):
 
 def get_news(req):
 
-    auth = NewsApiAuth(api_key='8d64b2e970014d7ab5df3f59119fb286')
+    auth = NewsApiAuth(api_key='')
     EVERYTHING_URL = "https://newsapi.org/v2/everything"
     HEADLINES_URL = "https://newsapi.org/v2/top-headlines"
     URL = HEADLINES_URL
